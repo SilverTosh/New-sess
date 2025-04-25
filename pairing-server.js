@@ -11,6 +11,11 @@ app.use(express.static(path.join(__dirname, "public")));
 const PORT = process.env.PORT || 3000;
 const activeSessions = {};
 
+// Route for root URL to show server status
+app.get("/", (req, res) => {
+    res.send("KINGVON Pairing Server is Live! Use /pair?number=123456 to start pairing.");
+});
+
 app.get("/pair", async (req, res) => {
     const number = req.query.number;
     if (!number) return res.status(400).json({ error: "Missing number" });
